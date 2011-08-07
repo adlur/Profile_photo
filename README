@@ -1,1 +1,23 @@
 An EE plugin to return a custom member image
+
+The source is pretty heavily commented, here's the usage I put together:
+
+Looks to see if a user has a profile photo or a profile avatar associated with their account, outputs an image URL.
+		
+		Parameters (all are optional)
+		member_id="" default is logged in member ID. WARNING! If the member_id is bad this will break.
+		primary_image="" accepts avatar or photo, default value is photo.
+		avatar="" If a member avatar can be supplied, this is where you'd put it.
+		photo="" SAA for the member photo.
+		default="" If you'd like to supply a default image if no member image can be found. 
+		avatar_field="" Optionally you can supply a custom field to search for a member avatar. Looking for digits: ie "24" (will become m_field_id_24). WARNING! If the avatar_field is bad this will break.
+		
+		If all else fails, the plugin will return "/images/avatar/default.jpg". Unless of course the member_id or avatar_field contain bad data.
+		
+		Example:
+		
+		{exp:member:custom_profile_data}
+		<img src="{exp:profile_photo member_id="{logged_in_member_id}" primary_image="photo" default="sample.png" avatar_field_id="1" photo="{photo_filename}"}">
+		{/exp:member:custom_profile_data}
+		
+		{photo_filename} needs to be inside of {exp:member:custom_profile_data}, otherwise this plugin will work without it.
